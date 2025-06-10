@@ -13,15 +13,15 @@ pipeline {
                         gv = load "script.groovy"
                     }
                 }
-            }
-        stage("build") {
+      }
+      stage("build") {
             steps {
                 script {
                     gv.buildApp()
                 }
             }
-        }
-        stage("test") {
+      }
+      stage("test") {
              when {
                 expression {
                     params.executeTests
@@ -33,17 +33,15 @@ pipeline {
                     gv.testApp()
                 }
              }
-        }
-        stage("deploy") {
+       }
+       stage("deploy") {
             steps {
                 script {
-                    env.ENV = input message: "Select the environment to deploy to", ok "Done", parameters: [choice(name: 'ONE', choices: ['dev', 'staging', 'production'], description: '')]
+                    env.ENV = input message: "Select the environment to deploy to", ok: "Done", parameters: [choice(name: 'ONE', choices: ['dev', 'staging', 'production'], description: '')]
                     gv.deployApp()
                     echo "Deploying to ${ENV}"
-
                 }
             }
-        }
+       }
     }
-
 } 
