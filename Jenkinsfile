@@ -34,7 +34,7 @@ pipeline {
       stage("build image") {
              steps {
                 script {
-                    buildImage()
+                    buildImage 'kanjamn/demo-app:jma-3.0'
                 }
              }
       }
